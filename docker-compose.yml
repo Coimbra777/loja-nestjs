@@ -1,0 +1,41 @@
+services:
+  app:
+    build: .
+    container_name: a4pm_api
+    restart: always
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=${DB_USER:-a4pm}
+      - DB_PASSWORD=${DB_PASSWORD:-a4pm123}
+      - DB_NAME=${DB_NAME:-a4pm_training}
+    depends_on:
+      - postgres
+    networks:
+      - a4pm_network
+
+  postgres:
+    image: postgres:16
+    container_name: a4pm_postgres
+    restart: always
+    ports:
+      - '5433:5432'
+    environment:
+      - POSTGRES_USER=${DB_USER:-a4pm}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-a4pm123}
+      - POSTGRES_DB=${DB_NAME:-a4pm_training}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - a4pm_network
+
+networks:
+  a4pm_network:
+
+volumes:
+  postgres_data:

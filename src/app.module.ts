@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { UsuarioController } from './usuario.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './modules/users/users.module';
 
@@ -19,7 +18,7 @@ import { UsersModule } from './modules/users/users.module';
     }),
     UsersModule,
   ],
-  controllers: [UsuarioController],
+  controllers: [],
   providers: [],
 })
 export class AppModule {}

@@ -17,6 +17,10 @@ export class CategoriesService {
     return this.categoriesRepository.save(category);
   }
 
+  async findByOne(id: number) {
+    return this.categoriesRepository.findOneBy({ id });
+  }
+
   async findAll() {
     return this.categoriesRepository.find();
   }
